@@ -5,7 +5,15 @@
 }
 message("I am in AkiraChix", 3000)
 
-// async function getUserData(id){
+
+
+// async function fetchUserData(userIDs){
+//     for(const userID of userIDs){
+//         const userData = await getUserData(userID);
+//         console.log(userData);
+//     }
+// }
+// async function getUserData(userID){
 //     for (const userID of userIDs){
 //        const userData = await getUserData(userID);
 //        console.log(userData); 
@@ -14,17 +22,30 @@ message("I am in AkiraChix", 3000)
 // const userIDs = [3,5,7,8,10]
 // getUserData(userIDs)
 
-// const userIds = [5,8,20,17,23];
-// function getUserData(id) {
-//  return new Promise((resolve, reject) => {
-//  setTimeout(() => {
-//  const userData = { id, name: `User ${id}` };
-//  resolve(userData);
-//  }, 1000);
-//  });
-// }
 
+function getUserData(id) {
+ return new Promise((resolve, reject) => {
+ setTimeout(() => {
+ const userData = { id, name: `User ${id}` };
+ resolve(userData);
+ }, 1000);
+ });
+}
 
+const userIds = [5,8,20,17,23];
+
+async function logUserData() {
+    for (const userId of userIds) {
+    try {
+    const userData = await getUserData(userId);
+    console.log(`User ID ${userId}: ${userData.name}`);
+    }
+    catch (error) {
+    console.error(`There's an error fetching data for User ID ${userId}: ${error.message}`);
+    }
+   }
+   }
+   logUserData()
 // You have an asynchronous function performTask() that returns a Promise. The Promise resolves if the task is successful and rejects if there's an error. Write a function that calls performTask() and logs a custom success message if the task is successful, and a custom error message if there's an error.
 async function performTask() {
 
